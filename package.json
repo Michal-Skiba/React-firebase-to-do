@@ -7,11 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "./node_modules/.bin/webpack",
     "start": "react-scripts start",
-    "serv": "./node_modules/.bin/webpack-dev-server --hot"
+    "serv": "./node_modules/.bin/webpack-dev-server --hot",
+    "build": "react-scripts build"
   },
   "author": "michal",
   "license": "ISC",
   "dependencies": {
+    "firebase": "^4.8.2",
+    "material-ui": "^1.0.0-beta.29",
+    "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
