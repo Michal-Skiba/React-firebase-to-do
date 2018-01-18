@@ -16,13 +16,12 @@ class App extends Component {
           messagingSenderId: "912501708249"
       };
       firebase.initializeApp(config);
-
   }
 
   render() {
     return (
       <div className="App">
-        <Proba db={firebase}/>
+
       </div>
     );
   }

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from "firebase";
-import Button from 'material-ui/Button';
-import * as actionTypes from "../../../redux--05-finished/src/store/actions";
+
 
 class Tasks extends Component {
     /*
@@ -14,6 +13,7 @@ class Tasks extends Component {
         };
     }
     */
+    //  https://material-ui-next.com
     componentWillMount(){
         let messagesRef = firebase.database().ref().child('tasks');
         console.log(messagesRef);
@@ -70,14 +70,11 @@ class Tasks extends Component {
     }
 }
 
-export default Tasks;
-
-
 
 
 const mapStateToProps = state => {
     return {
-        tasks: state.tasks
+        xyz: state.message,
     };
 };
 
