@@ -26,16 +26,6 @@ export const add_task = (name, priority) =>{
         priority: priority
     };
     return (dispatch) => {
-        // dispatch
-        writeTask(newTask.id, newTask.name, newTask.priority)
-            .then(() => {
-                dispatch(addTaskSucccess(newTask));  //to co się dzieje po dodanie
-            })
-            .catch((error) => {
-                // Lapie bledy
-            })
-    }
-};
 
 
 // id bez
@@ -69,6 +59,18 @@ export const removeTruck = id => {
 
 
 
+=======
+const remTsk =
+
+export const removeTask = (state, id) =>{
+   return(dispatch) =>{
+       //type: REMOVE_TASK;
+   }
+};
+
+
+/*
+>>>>>>> 4099ddde1dc157731a159ab5ccc1062d378d04a6
 state.tasks.filter(task => task.id !== id)
 
 tasks: state.tasks.filter(task => task.id !== action.taskId)
@@ -134,8 +136,11 @@ const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state prze
     }
 };
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4099ddde1dc157731a159ab5ccc1062d378d04a6
 */
 
 //export default add_task
