@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Task from '../components/Task/Task';
-import AddTask from '../components/AddTask/AddTask';
-import * as actionTypes from '../store/actions';
+import Task from '../components/Task/task';
+import AddTask from '../components/AddTask/addTask';
+import { add_task } from "../store/actions";
+import { removeTask } from "../store/actions";
 
 class Tasks extends Component {
     render () {
+        console.log(this.props);
         return (
             <div>
-                <AddTask taskAdded={this.props.onAddTask} />
+                <AddTask taskAdded={this.props.add_task} />
                 {this.props.task.map(tsk => ( // Leci po glownym state i przekuzje  jego wartosci
                     <Task
                         key={tsk.id}
                         name={tsk.name}
                         priority={tsk.priority}
-                        clicked={() => this.props.onRemoveTask(tsk.id)}/>
+                        clicked={() => this.props.removeTask(tsk.id)}
+                     />
                 ))}
             </div>
         );
     }
 }
+
+//this.props.removeTask(tsk.id)
 
 const mapStateToProps = state => { // Laczy z glownym statem
     return {
@@ -27,11 +32,13 @@ const mapStateToProps = state => { // Laczy z glownym statem
     };
 };
 
+
+/*
 const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state przez reducera
     return {
         onAddTask: (name, priority) => dispatch({type: actionTypes.ADD_TASK, taskData: {name: name, priority: priority}}),
         onRemoveTask: (id) => dispatch({type: actionTypes.REMOVE_TASK, taskId: id})
     }
 };
-
-export default connect(mapStateToProps, mapDispatchToProps)(Tasks); // pozwala polaczyc z reducerem?
+*/
+export default connect(mapStateToProps,  { add_task }, {removeTask} )(Tasks); // pozwala polaczyc z reducerem? {addTask}

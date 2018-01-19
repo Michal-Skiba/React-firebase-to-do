@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Task.css';
+import './task.css';
 
 const Task = (props) => (
     <div className="Task" onClick={props.clicked}>
@@ -10,3 +10,5 @@ const Task = (props) => (
 );
 
 export default Task;
+
+//onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}

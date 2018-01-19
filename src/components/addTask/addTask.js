@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './AddTask.css';
+import './addTask.css';
 import Button from 'material-ui/Button';
 
-class AddPerson extends Component {
+class AddTask extends Component {
     state = {
         name: '',
         priority: ''
@@ -35,4 +35,4 @@ class AddPerson extends Component {
     }
 }
 
-export default AddPerson;
+export default AddTask;
