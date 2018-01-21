@@ -1,0 +1,21 @@
+#error{
+    width: 1000px;
+    height: 100px;
+    background: red;
+    color: white;
+    font-size: 35px;
+    text-align: center;
+    padding-top: 50px;
+    margin: 0 auto;
+}
+
+#loading{
+    width: 1000px;
+    height: 100px;
+    background: green;
+    color: black;
+    font-size: 35px;
+    text-align: center;
+    padding-top: 50px;
+    margin: 0 auto;
+}

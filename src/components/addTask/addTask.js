@@ -29,7 +29,7 @@ class AddTask extends Component {
                     placeholder="priority"
                     onChange={this.priorityChangedHandler}
                     value={this.state.priority} />
-                <Button raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</Button>
+                <Button id={"button"} raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</Button>
             </div>
         );
     }

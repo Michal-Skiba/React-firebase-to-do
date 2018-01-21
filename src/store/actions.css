@@ -1,0 +1,6 @@
+body.busy-cursor {
+    cursor: progress;
+}
+#button{
+    cursor: pointer;
+}
