@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Task from '../components/Task/task';
-import Error from '../components/Error/Error';
+import HandleStatus from '../components/HandleStatus/HandleStatus';
 import AddTask from '../components/AddTask/addTask';
+import Oldtasks from '../components/OldTasks/oldTasks';
 import { add_task } from "../store/actions";
 import { removeTask } from "../store/actions";
 import { fillTasks } from "../store/actions";
-import { checkStatus } from "../store/actions";
+import { taskArray } from "../store/actions";
+
 
 //{status === 'pending' ? <loader> : button }
 // component did mount => fetch listya  jak się robi promisy -> redux promis -> redux tunk
 
 class Tasks extends Component {
 
+    componentWillMount(){
+        fillTasks();
+    }
+
     componentDidMount() {
-        console.log('componentDidMount');
-        this.props.fillTasks
-        checkStatus(this.props.status)
+        //console.log('componentDidMount');
+
+        //console.log(taskArray);
+        console.log(this.props.task, "TASK Z TASK")
+
+
     }
 
     componentDidUpdate(){
-        checkStatus(this.props.status)
+        console.log(this.props.task, "TASK Z TASK");
+        //console.log(taskArray)
     }
 
     render () {
@@ -35,7 +45,10 @@ class Tasks extends Component {
                         clicked={() => this.props.removeTask(tsk.id)}
                      />
                 ))}
-                <Error/>
+                <div>
+
+                </div>
+                <HandleStatus status={this.props.status}/>
             </div>
         );
     }
@@ -46,7 +59,7 @@ class Tasks extends Component {
 const mapStateToProps = state => { // Laczy z glownym statem
     return {
         task: state.tasks,
-        status: state.status
+        status: state.status,
     };
 };
 
@@ -57,6 +70,15 @@ const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state prze
         onAddTask: (name, priority) => dispatch({type: actionTypes.ADD_TASK, taskData: {name: name, priority: priority}}),
         onRemoveTask: (id) => dispatch({type: actionTypes.REMOVE_TASK, taskId: id})
     }
+
+    {taskArray.map(tas => (
+                        <Oldtasks
+                            key={tas.id}
+                            name={tas.name}
+                            priority={tas.priority}
+                            clicked={() => this.props.removeTask(tas.id)}
+                        />
+                    ))}
 };
 */
-export default connect(mapStateToProps,  { add_task, removeTask, fillTasks, checkStatus} )(Tasks);
+export default connect(mapStateToProps,  { add_task, removeTask, fillTasks} )(Tasks);

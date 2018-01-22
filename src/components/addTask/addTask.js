@@ -18,18 +18,20 @@ class AddTask extends Component {
 
     render () {
         return (
-            <div className="AddTask">
-                <input 
-                    type="text" 
-                    placeholder="Name" 
-                    onChange={this.nameChangedHandler}
-                    value={this.state.name} />
-                <input 
-                    type="number" 
-                    placeholder="priority"
-                    onChange={this.priorityChangedHandler}
-                    value={this.state.priority} />
-                <Button id={"button"} raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</Button>
+            <div>
+                <div className="AddTask">
+                    <input
+                        type="text"
+                        placeholder="Name"
+                        onChange={this.nameChangedHandler}
+                        value={this.state.name} />
+                    <input
+                        type="number"
+                        placeholder="priority"
+                        onChange={this.priorityChangedHandler}
+                        value={this.state.priority} />
+                    <Button id={"button"} raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</Button>
+                </div>
             </div>
         );
     }

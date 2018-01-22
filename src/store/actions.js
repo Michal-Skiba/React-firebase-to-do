@@ -7,7 +7,9 @@ export const GET_EVENT_START = 'GET_EVENT_START';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
 export const GET_EVENT_ERROR = 'GET_EVENT_ERROR';
 
-//Czy można mieć dostęp tu do state ?
+export const taskArray = [];
+
+
 
 
 // DODAWANIE TAKSÓW
@@ -20,34 +22,33 @@ const writeTask =(id, name, priority) => {
 };
 
 const addTask = (task) =>{
+    console.log(task, "ADDTASK===============");
     return{
         type: ADD_TASK,
         task,  //to co przeazuje do reducera to samo co task: task
     }
 };
 
-
-
 export const add_task = (name, priority) =>{
+    console.log('wywołanie');
     const newTask = {
         id: Math.round(Math.random()*1000000000),
         name: name,
         priority: priority
     };
 
+    console.log(newTask);
     return (dispatch) => {
-        console.log('Wysyłam');
         dispatch(getEventStart());
         writeTask(newTask.id, newTask.name, newTask.priority)
             .then(() => {
                 dispatch(getEventSuccess());
-                console.log('dodałem');
-                dispatch(addTask(newTask));
+                dispatch(addTask(newTask)); //////
             })
             .catch((error) => {
                 dispatch(getEventError(error));
-                console.log("nie wysłalem")
             })
+
     }
 };
 
@@ -75,56 +76,29 @@ export const removeTask = (id) =>{
 // ZACIĄGANIE TASKÓW
 
 
-const downloadTask = (task) =>{
-    console.log("downloadTask");
-    return(dispatch) => {
-        dispatch(addTask(task))
-    }
-};
-
 const addTaskFromData = (name, priority, id) =>{
     const newTask = {
         id,
         name,
         priority
     };
+    //taskArray.push(newTask);
+    console.log(newTask);
+    console.log("Przed dispatchem addTaskFromData");
+    //Tu koniec
     return (dispatch) => {
-        dispatch(addTask(newTask));  //to co się dzieje po dodanie
-    }
+        console.log(" ZAA DISPATCHEM");
+        dispatch(addTask(newTask))
+    };
+
 };
 
 export const fillTasks = () =>{
     const ref = firebase.database().ref().child('Task');
     ref.on('child_added', snap => {
-        let name = snap.val().name;
-        let priority = snap.val().priority;
-        let id = snap.val().id;
-        console.log(id, priority, name);
+        const { name, priority, id } = snap.val();
         addTaskFromData(name, priority, id)
     });
-};
-
-export const checkStatus = (status) =>{
-    const error = document.getElementById('error');
-    const loading = document.getElementById('loading');
-    const button = document.getElementById('button');
-
-    if(status === false){
-        error.style.display = "block";
-        loading.style.display = "none";
-        button.style.cursor = 'pointer';
-        console.log("===================== FALSE");
-    }else if(status === true){
-        error.style.display = "none";
-        button.style.cursor = 'progress';
-        loading.style.display = "block";
-        console.log("===================== TRUE");
-    }else{
-        error.style.display = "none";
-        button.style.cursor = 'pointer';
-        loading.style.display = "none";
-        console.log("===================== NULL");
-    }
 };
 
 export const getEventStart = () =>{
@@ -132,7 +106,6 @@ export const getEventStart = () =>{
     return{
         type: GET_EVENT_START
     }
-
 };
 
 export const getEventSuccess = () =>{
@@ -150,7 +123,14 @@ export const getEventError = () =>{
 };
 
 
+
 /*
+
+for(let i=0; i<taskArray.length; i++){
+    console.log('gg');
+    addTask(taskArray[i])
+}
+
 export const fillTasks = () =>{
     const ref = firebase.database().ref().child('Task');
     ref.on('child_added', snap => {

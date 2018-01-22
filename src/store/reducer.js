@@ -4,7 +4,7 @@ import * as actionTypes from './actions';
 
 const initialState = {
     tasks: [],
-    status: null,
+    status: "success",
 };
 
 
@@ -26,20 +26,20 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.GET_EVENT_START:
             return{
                 ...state,
-                status: true
+                status: "start"
             };
         case actionTypes.GET_EVENT_SUCCESS:
             return{
                 ...state,
-                status: null
+                status: "success"
             };
         case actionTypes.GET_EVENT_ERROR:
             return{
                 ...state,
-                status: false
-        }
-    }
-    return state;
+                status: 'error'
+            };
+         }
+        return state;
 };
 
 export default reducer;
