@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './addTask.css';
 import Button from 'material-ui/Button';
-
+import TextField from 'material-ui/TextField';
 class AddTask extends Component {
     state = {
         name: '',
@@ -20,16 +20,25 @@ class AddTask extends Component {
         return (
             <div>
                 <div className="AddTask">
-                    <input
-                        type="text"
+                    <TextField
+                        id="textarea"
+                        label="Name of task"
                         placeholder="Name"
+                        //className={classes.textField}
+                        margin="normal"
                         onChange={this.nameChangedHandler}
-                        value={this.state.name} />
-                    <input
+                        value={this.state.name}
+                    />
+                    <TextField
                         type="number"
-                        placeholder="priority"
+                        id="textarea"
+                        label="Priority"
+                        placeholder="Name"
+                        //className={classes.textField}
+                        margin="normal"
                         onChange={this.priorityChangedHandler}
-                        value={this.state.priority} />
+                        value={this.state.priority}
+                    />
                     <Button id={"button"} raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</Button>
                 </div>
             </div>
@@ -37,4 +46,19 @@ class AddTask extends Component {
     }
 }
 
+
+
 export default AddTask;
+
+/*
+<input
+                        type="text"
+                        placeholder="Name"
+                        onChange={this.nameChangedHandler}
+                        value={this.state.name} />
+<input
+                        type="number"
+                        placeholder="priority"
+                        onChange={this.priorityChangedHandler}
+                        value={this.state.priority} />
+ */

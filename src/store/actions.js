@@ -7,11 +7,6 @@ export const GET_EVENT_START = 'GET_EVENT_START';
 export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
 export const GET_EVENT_ERROR = 'GET_EVENT_ERROR';
 
-export const taskArray = [];
-
-
-
-
 // DODAWANIE TAKSÓW
 const writeTask =(id, name, priority) => {
     return firebase.database().ref('Task/' + id).set({
@@ -21,29 +16,35 @@ const writeTask =(id, name, priority) => {
     })
 };
 
+const status = (status) =>{
+  return{
+      type: ADD_TASK,
+      status,
+  }
+};
+
+
 const addTask = (task) =>{
     console.log(task, "ADDTASK===============");
     return{
         type: ADD_TASK,
-        task,  //to co przeazuje do reducera to samo co task: task
+        task,
+        status,//to co przeazuje do reducera to samo co task: task
     }
 };
 
 export const add_task = (name, priority) =>{
-    console.log('wywołanie');
     const newTask = {
         id: Math.round(Math.random()*1000000000),
         name: name,
         priority: priority
     };
 
-    console.log(newTask);
     return (dispatch) => {
         dispatch(getEventStart());
         writeTask(newTask.id, newTask.name, newTask.priority)
             .then(() => {
                 dispatch(getEventSuccess());
-                dispatch(addTask(newTask)); //////
             })
             .catch((error) => {
                 dispatch(getEventError(error));
@@ -58,6 +59,7 @@ const removeFromFirebase = (id)=>{
     const ref = firebase.database().ref('Task').child(id);
     return ref.remove()
 };
+
 
 const removeTsk = (id) =>{
     return{
@@ -76,29 +78,13 @@ export const removeTask = (id) =>{
 // ZACIĄGANIE TASKÓW
 
 
-const addTaskFromData = (name, priority, id) =>{
-    const newTask = {
-        id,
-        name,
-        priority
-    };
-    //taskArray.push(newTask);
-    console.log(newTask);
-    console.log("Przed dispatchem addTaskFromData");
-    //Tu koniec
-    return (dispatch) => {
-        console.log(" ZAA DISPATCHEM");
-        dispatch(addTask(newTask))
-    };
-
-};
-
 export const fillTasks = () =>{
     const ref = firebase.database().ref().child('Task');
-    ref.on('child_added', snap => {
-        const { name, priority, id } = snap.val();
-        addTaskFromData(name, priority, id)
-    });
+    return (dispatch) => {
+        ref.on('child_added', snap => {
+            dispatch(addTask(snap.val()))
+        });
+    }
 };
 
 export const getEventStart = () =>{

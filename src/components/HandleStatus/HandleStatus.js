@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Error.css"
+import "./HandleStatus.css"
 
 const HandleStatus = ({ status }) => { // można bezpośrednio przekazać || (dd) ? true :false; ZMIEN NAZWE
     let answer = "";
@@ -15,6 +15,7 @@ const HandleStatus = ({ status }) => { // można bezpośrednio przekazać || (dd
     return (
         answer
     );
+
 };
 
 export default HandleStatus;

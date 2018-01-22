@@ -1,21 +1,18 @@
 import * as actionTypes from './actions';
 
-
-
 const initialState = {
     tasks: [],
     status: "success",
 };
-
 
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
         case actionTypes.ADD_TASK:
             return {
                 ...state,
-                tasks: [  //tworzy nowy array
+                tasks: [
                     ...state.tasks,
-                    action.task,  //przekazenie
+                    action.task,
                 ],
             };
         case actionTypes.REMOVE_TASK:
@@ -38,6 +35,7 @@ const reducer = ( state = initialState, action ) => {
                 ...state,
                 status: 'error'
             };
+
          }
         return state;
 };
