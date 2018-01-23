@@ -2,15 +2,20 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import About from './About';
+import Task from '../components/Task/task';
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+
 
 Enzyme.configure({ adapter: new Adapter() });
 
 
 test('About component should be render as expected', () =>{
     const component = shallow(<About/>);
-    console.log(component)
+    expect(component.contains("Hi, i am Michal")).toBe(true);  // contains => Boolean || const component = mount(to co będzie zamontowane) importuj z enzyma
+    expect(component.contains(" to bedzie fals")).toBe(false);
+    expect(component.find(Task).length).toBe(1);
+
 });
 
 
@@ -18,8 +23,13 @@ test('About component should be render as expected', () =>{
 
 
 
-
 /*
+
+find(div.klasa)
+
+
+
+
 describe('testing Test component', () => {
     let wrapper;
     beforeEach(() => { wrapper = shallow(<Test_2 />); });
