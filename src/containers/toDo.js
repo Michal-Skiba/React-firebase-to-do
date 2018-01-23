@@ -8,19 +8,16 @@ import { removeTask } from "../store/actions";
 import { fillTasks } from "../store/actions";
 
 
-
-//{status === 'pending' ? <loader> : button }
-// component did mount => fetch listya  jak się robi promisy -> redux promis -> redux tunk
-
 class Tasks extends Component {
 
     componentWillMount(){
-        this.props.fillTasks(); // To fillTasks() -- to pójdzie bez conecta
+        this.props.fillTasks(); // To fillTasks() -- to pójdzie bez conecta -- BARDZO WAZNE
     }
 
     render () {
         return (
             <div>
+
                 <AddTask taskAdded={this.props.add_task}/>
                 {this.props.task.map(tsk => (
                     <Task
@@ -52,5 +49,6 @@ const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state prze
         onAddTask: (name, priority) => dispatch({type: actionTypes.ADD_TASK, taskData: {name: name, priority: priority}}),
         onRemoveTask: (id) => dispatch({type: actionTypes.REMOVE_TASK, taskId: id})
     }
+};
 */
 export default connect(mapStateToProps,  { add_task, removeTask, fillTasks} )(Tasks);

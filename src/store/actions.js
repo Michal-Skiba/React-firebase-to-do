@@ -1,13 +1,16 @@
 import firebase from "firebase";
 import './actions.css';
 
-export const ADD_TASK = 'ADD_TASK';
+
+export const ADD_TASK_SUCCESS = 'ADD_TASK_SUCCESS';
+export const ADD_TASK_STATUS = 'ADD_TASK_STATUS';
 export const REMOVE_TASK = 'REMOVE_TASK';
-export const GET_EVENT_START = 'GET_EVENT_START';
-export const GET_EVENT_SUCCESS = 'GET_EVENT_SUCCESS';
-export const GET_EVENT_ERROR = 'GET_EVENT_ERROR';
+export const ADD_TASK = 'ADD_TASK';
+//Czy można mieć dostęp tu do state ?
+
 
 // DODAWANIE TAKSÓW
+
 const writeTask =(id, name, priority) => {
     return firebase.database().ref('Task/' + id).set({
         name,
@@ -15,39 +18,42 @@ const writeTask =(id, name, priority) => {
         id
     })
 };
-
-const status = (status) =>{
-  return{
-      type: ADD_TASK,
-      status,
-  }
-};
-
-
-const addTask = (task) =>{
-    console.log(task, "ADDTASK===============");
+const addTaskSuccess = (task) =>{
     return{
-        type: ADD_TASK,
+        type: ADD_TASK_SUCCESS,
+        status: "success",
         task,
-        status,//to co przeazuje do reducera to samo co task: task
     }
 };
 
+const addTaskStatus = (status) =>{
+    return{
+        type: ADD_TASK_STATUS,
+        status: status
+    }
+};
+
+
+
+
 export const add_task = (name, priority) =>{
+    console.log('wywołanie');
     const newTask = {
         id: Math.round(Math.random()*1000000000),
         name: name,
         priority: priority
     };
 
+    console.log(newTask);
     return (dispatch) => {
-        dispatch(getEventStart());
+        dispatch(addTaskStatus("start"));
         writeTask(newTask.id, newTask.name, newTask.priority)
             .then(() => {
-                dispatch(getEventSuccess());
+                console.log('.then');
+                dispatch(addTaskStatus("success"));
             })
-            .catch((error) => {
-                dispatch(getEventError(error));
+            .catch(() => {
+                dispatch(addTaskStatus("error"));
             })
 
     }
@@ -60,166 +66,21 @@ const removeFromFirebase = (id)=>{
     return ref.remove()
 };
 
-
-const removeTsk = (id) =>{
-    return{
-        type: REMOVE_TASK,
-        id,
-    }
-};
-
 export const removeTask = (id) =>{
+    removeFromFirebase(id);
     return (dispatch) => {
-        dispatch(removeTsk(id));
-        removeFromFirebase(id)
+        dispatch({ type: REMOVE_TASK, id});
     }
 };
 
 // ZACIĄGANIE TASKÓW
 
-
 export const fillTasks = () =>{
     const ref = firebase.database().ref().child('Task');
     return (dispatch) => {
         ref.on('child_added', snap => {
-            dispatch(addTask(snap.val()))
+            dispatch(addTaskSuccess(snap.val()))
         });
     }
 };
 
-export const getEventStart = () =>{
-    console.log("START");
-    return{
-        type: GET_EVENT_START
-    }
-};
-
-export const getEventSuccess = () =>{
-    console.log("SUCCESS");
-    return{
-        type: GET_EVENT_SUCCESS
-    }
-};
-
-export const getEventError = () =>{
-    console.log("ERROR");
-    return{
-        type: GET_EVENT_ERROR
-    }
-};
-
-
-
-/*
-
-for(let i=0; i<taskArray.length; i++){
-    console.log('gg');
-    addTask(taskArray[i])
-}
-
-export const fillTasks = () =>{
-    const ref = firebase.database().ref().child('Task');
-    ref.on('child_added', snap => {
-        const newTask = {
-            id: snap.val().id,
-            name: snap.val().name,
-            priority: snap.val().priority
-        };
-        downloadTask(newTask)
-    });
-
-};
-
-export const fillTasks = () =>{
-    const ref = firebase.database().ref().child('Task');
-    let newState = [];
-    ref.on('child_added', snap => {
-        const newTask = {
-            id: snap.val().id,
-            name: snap.val().name,
-            priority: snap.val().priority
-        };
-        newState.push(newTask);
-    });
-    console.log(newState, "new state");
-    return (dispatch) => {
-        dispatch(downloadTask(newState));
-    }
-};
-
-state.tasks.filter(task => task.id !== id)\
-
-query.once("value")
-        .then((snapshot) =>{
-            snapshot.forEach((childSnapshot) =>{
-                let childData = childSnapshot.val();
-                console.log(childData.name);
-            })
-        })
-
-tasks: state.tasks.filter(task => task.id !== action.taskId)
-
-const writeTask =(id, name, priority) => {
-    firebase.database().ref('Task/' + id).set({
-        name: name,
-        priority: priority
-    });
-};
-
-const addTask = () =>{
-    return{
-        type: ADD_TASK
-    }
-};
-*/
-/*
-const addTaska = ( state, action ) =>{
-    const newTask = {
-        id: Math.round(Math.random()*1000000000),
-        name: action.taskData.name,
-        priority: action.taskData.priority
-    };
-    writeTask(newTask.id, newTask.name, newTask.priority);
-    return {
-        ...state,
-        tasks: state.tasks.concat( newTask )
-    };
-};
-*/
-
-
-
-
-/*const reducer = ( state = initialState, action ) => {
-    switch ( action.type ) {
-        case actionTypes.ADD_TASK:
-            const newTask = {
-                id: Math.round(Math.random()*1000000000),
-                name: action.taskData.name,
-                priority: action.taskData.priority
-            };
-            writeTask(newTask.id, newTask.name, newTask.priority);
-            return {
-                ...state,
-                tasks: state.tasks.concat( newTask )
-            };
-        case actionTypes.REMOVE_TASK:
-            return {
-                ...state,
-                tasks: state.tasks.filter(task => task.id !== action.taskId)
-            }
-    }
-    return state;
-};
-
-
-const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state przez reducera
-    return {
-        onAddTask: (name, priority) => dispatch({type: actionTypes.ADD_TASK, taskData: {name: name, priority: priority}}),
-        onRemoveTask: (id) => dispatch({type: actionTypes.REMOVE_TASK, taskId: id})
-    }
-};
-
-*/
-
-//export default add_task
