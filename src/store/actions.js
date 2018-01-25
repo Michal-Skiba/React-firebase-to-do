@@ -1,13 +1,9 @@
 import firebase from "firebase";
 import './actions.css';
 
-
 export const ADD_TASK_SUCCESS = 'ADD_TASK_SUCCESS';
 export const ADD_TASK_STATUS = 'ADD_TASK_STATUS';
 export const REMOVE_TASK = 'REMOVE_TASK';
-export const ADD_TASK = 'ADD_TASK';
-//Czy można mieć dostęp tu do state ?
-
 
 // DODAWANIE TAKSÓW
 
@@ -18,7 +14,7 @@ const writeTask =(id, name, priority) => {
         id
     })
 };
-const addTaskSuccess = (task) =>{
+export const addTaskSuccess = (task) =>{
     return{
         type: ADD_TASK_SUCCESS,
         status: "success",
@@ -26,30 +22,24 @@ const addTaskSuccess = (task) =>{
     }
 };
 
-const addTaskStatus = (status) =>{
+export const addTaskStatus = (status) =>{
     return{
         type: ADD_TASK_STATUS,
         status: status
     }
 };
 
-
-
-
-export const add_task = (name, priority) =>{
-    console.log('wywołanie');
+export const addTask = (name, priority) =>{
     const newTask = {
         id: Math.round(Math.random()*1000000000),
         name: name,
         priority: priority
     };
 
-    console.log(newTask);
     return (dispatch) => {
         dispatch(addTaskStatus("start"));
         writeTask(newTask.id, newTask.name, newTask.priority)
             .then(() => {
-                console.log('.then');
                 dispatch(addTaskStatus("success"));
             })
             .catch(() => {

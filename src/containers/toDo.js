@@ -3,22 +3,20 @@ import { connect } from 'react-redux';
 import Task from '../components/Task/task';
 import HandleStatus from '../components/HandleStatus/HandleStatus';
 import AddTask from '../components/AddTask/addTask';
-import { add_task } from "../store/actions";
+import { addTask } from "../store/actions";
 import { removeTask } from "../store/actions";
 import { fillTasks } from "../store/actions";
-
-
 class Tasks extends Component {
 
     componentWillMount(){
-        this.props.fillTasks(); // To fillTasks() -- to pójdzie bez conecta -- BARDZO WAZNE
+        this.props.fillTasks(); // fillTasks() -- to pójdzie bez conecta i dipatch nie będzie działał -- BARDZO WAZNE
     }
 
     render () {
         return (
             <div>
 
-                <AddTask taskAdded={this.props.add_task}/>
+                <AddTask taskAdded={this.props.addTask}/>
                 {this.props.task.map(tsk => (
                     <Task
                         key={tsk.id}
@@ -32,8 +30,6 @@ class Tasks extends Component {
         );
     }
 }
-
-//this.props.removeTask(tsk.id)
 
 const mapStateToProps = state => { // Laczy z glownym statem
     return {
@@ -51,4 +47,4 @@ const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state prze
     }
 };
 */
-export default connect(mapStateToProps,  { add_task, removeTask, fillTasks} )(Tasks);
+export default connect(mapStateToProps,  { addTask, removeTask, fillTasks} )(Tasks);

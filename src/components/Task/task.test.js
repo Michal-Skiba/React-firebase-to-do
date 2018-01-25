@@ -7,11 +7,10 @@ import Adapter from "enzyme-adapter-react-16";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('<Task />',() =>{
+describe('component task test',() =>{
     it('Tasks length should be one', () =>{
         const component = shallow(<Task/>);
-        expect(component.length).toBe(1);
+        expect(component.exists()).toBe(true);
     });
 });
-
 

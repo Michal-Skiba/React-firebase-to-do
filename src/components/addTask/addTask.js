@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './addTask.css';
 import Button from 'material-ui/Button';
 
-class AddTask extends Component {
+export class AddTask extends Component {
     state = {
         name: '',
         priority: ''

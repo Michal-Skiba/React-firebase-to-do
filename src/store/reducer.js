@@ -29,23 +29,6 @@ const reducer = ( state = initialState, action ) => {
                 ...state,
                 tasks: state.tasks.filter(task => task.id !== action.id)
             };
-            /*
-        case actionTypes.GET_EVENT_START:
-            return{
-                ...state,
-                status: "start"
-            };
-        case actionTypes.GET_EVENT_SUCCESS:
-            return{
-                ...state,
-                status: "success"
-            };
-        case actionTypes.GET_EVENT_ERROR:
-            return{
-                ...state,
-                status: 'error'
-            };
-            */
          }
 
         return state;
