@@ -1,15 +1,15 @@
-/*
+
 import React from 'react';
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import * as AddTask from "./addTask"
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Addtask component test',() =>{
     let component;
     beforeEach(() => {
-        component = shallow(<AddTask/>);
+        component = mount(<AddTask/>);
     });
 
     it('should exist', () => {
@@ -23,7 +23,7 @@ describe('Addtask component test',() =>{
             priority: ''
         };
         const file = "name";
-        const input = component.find('input').get(0);
+        const input = component.find('input')
         const button = component.find('button');
         input.simulate('change', file);
         button.click();
@@ -33,7 +33,7 @@ describe('Addtask component test',() =>{
 
 });
 
-*/
+
 
 /*
 //////

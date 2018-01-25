@@ -7,14 +7,8 @@ import HandleStatus from './HandleStatus'
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('handle status',() =>{
-let component;
-let status;
-beforeEach(() => {
-    component = mount(<HandleStatus status={status}/>);
-});
-
-it('HandleStatus should return empty div', () =>{
-        status =
+    it('HandleStatus should return empty div', () =>{
+        const component = mount(<HandleStatus status="success"/>);
         const expected = (<div></div>);
         expect(component.contains(expected)).toBe(true);
     });
