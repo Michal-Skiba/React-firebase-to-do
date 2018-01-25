@@ -3,28 +3,33 @@ import './addTask.css';
 import Button from 'material-ui/Button';
 
 export class AddTask extends Component {
-    state = {
-        name: '',
-        priority: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            priority: ''
+        };
+        this.nameChangedHandler = (event) => {
+            this.setState({name: event.target.value});
+        };
 
-    nameChangedHandler = (event) => {
-        this.setState({name: event.target.value});
-    };
+        this.priorityChangedHandler = (event) => {
+            this.setState({priority: event.target.value});
+        };
+    }
 
-    priorityChangedHandler = (event) => {
-        this.setState({priority: event.target.value});
-    };
 
     render () {
         return (
             <div className="AddTask">
-                <input 
+                <input
+                    id="firstInput"
                     type="text" 
                     placeholder="Name" 
                     onChange={this.nameChangedHandler}
                     value={this.state.name} />
-                <input 
+                <input
+                    id="secondInput"
                     type="number" 
                     placeholder="priority"
                     onChange={this.priorityChangedHandler}

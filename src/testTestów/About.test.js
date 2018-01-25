@@ -5,6 +5,7 @@ import About from './About';
 import Task from '../components/Task/task';
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+import {mount} from "enzyme/build/index";
 
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -26,8 +27,6 @@ test('About component should be render as expected', () =>{
 /*
 
 find(div.klasa)
-
-
 
 
 describe('testing Test component', () => {

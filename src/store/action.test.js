@@ -1,8 +1,4 @@
 import * as actions from './actions';
-import {addTaskStatus} from "./actions";
-
-
-
 
 
 describe('action change status, and add task', () =>{
@@ -11,7 +7,7 @@ describe('action change status, and add task', () =>{
        const expectedAction = {
            type: actions.ADD_TASK_SUCCESS,
            status: "success",
-           task,
+           task: "test"
        };
        expect(actions.addTaskSuccess(task)).toEqual(expectedAction)
    });
@@ -24,20 +20,6 @@ describe('action change status, and add task', () =>{
         expect(actions.addTaskStatus(status)).toEqual(expectedAction)
    })
 });
-/*
-describe('function adding task with id, name and priority', () =>{
-   it('should create object with id,name and priority', ()=>{
-        const name = "toDo";
-        const priority = "2";
-        const expectedAction = {
-            name: "toDo",
-            priority: "2"
-        }
-
-   })
-});
-*/
-
 
 
 /*
