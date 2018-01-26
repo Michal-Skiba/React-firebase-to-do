@@ -18,7 +18,10 @@ describe('action change status, and add task', () =>{
             status: "error",
         };
         expect(actions.addTaskStatus(status)).toEqual(expectedAction)
-   })
+   });
+    it('should add function addTask', () =>{
+
+    })
 });
 
 

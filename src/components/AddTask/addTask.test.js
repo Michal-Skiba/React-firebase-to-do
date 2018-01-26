@@ -2,14 +2,23 @@
 import React from 'react';
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import * as AddTask from "./addTask"
-import { mount } from 'enzyme';
+import AddTask from "./addTask"
+import { mount, shallow } from 'enzyme';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Addtask component test',() =>{
     let component;
+    let spy;
+    let props;
+    let secondSpy;
     beforeEach(() => {
-        component = mount(<AddTask/>);
+        spy = jest.fn();
+        secondSpy = jest.fn();
+        props = {
+            nameChangedHandler: () => spy(),
+            priorityChangedHandler: () => secondSpy(),
+        };
+        component = mount(<AddTask  {...props} />);
     });
 
     it('should exist', () => {
@@ -18,17 +27,29 @@ describe('Addtask component test',() =>{
 
     it('test nameChangeHandler', () =>{
 
-        let expectedState = {
+        const name = "name";
+        const priority = "priority";
+        const inputName = component.find('#firstInput');
+        const inputPriority = component.find('#secondInput');
+        const expectedState = {
             name: 'name',
-            priority: ''
+            priority: 'priority'
         };
-        const file = "name";
-        const input = component.find('input')
-        const button = component.find('button');
-        input.simulate('change', file);
-        button.click();
-        expect(AddTask.this.nameChangedHandler).toHaveBeenCalled();
-        expect(component.state).toEqual(expectedState)
+        const button = component.find('#button');
+        inputName.simulate('change', name);
+        inputPriority.simulate('change', priority);
+        button.simulate('click');
+        expect(spy).toHaveBeenCalledTimes(1);
+        expect(secondSpy).toHaveBeenCalledTimes(1);
+        expect(state()).toEqual(expectedState)
+
+
+        //console.log(component.debug());
+        //const button = component.find('#button').get(0);
+        //button.simulate('click')
+        //expect(AddTask.this.nameChangedHandler).toHaveBeenCalled();
+        //expect(component.state()).toEqual(expectedState)
+        //component.find('#button').simulate('click')
     });
 
 });
