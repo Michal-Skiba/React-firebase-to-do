@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './addTask.css';
 import Button from 'material-ui/Button';
+import PropTypes from "prop-types";
 
 export class AddTask extends Component {
     constructor(props) {
@@ -18,7 +19,6 @@ export class AddTask extends Component {
         };
     }
 
-
     render () {
         return (
             <div className="AddTask">
@@ -34,10 +34,14 @@ export class AddTask extends Component {
                     placeholder="priority"
                     onChange={this.priorityChangedHandler}
                     value={this.state.priority} />
-                <Button id={"button"} raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</Button>
+                <Button id="button" raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</Button>
             </div>
         );
     }
 }
+
+AddTask.propTypes = {
+    taskAdded: PropTypes.func
+};
 
 export default AddTask;

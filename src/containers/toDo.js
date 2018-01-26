@@ -3,10 +3,13 @@ import { connect } from 'react-redux';
 import Task from '../components/Task/task';
 import HandleStatus from '../components/HandleStatus/HandleStatus';
 import AddTask from '../components/AddTask/addTask';
+import PropTypes from 'prop-types';
 import { addTask } from "../store/actions";
 import { removeTask } from "../store/actions";
 import { fillTasks } from "../store/actions";
-class Tasks extends Component {
+
+
+export class Tasks extends Component {
 
     componentWillMount(){
         this.props.fillTasks(); // fillTasks() -- to pójdzie bez conecta i dipatch nie będzie działał -- BARDZO WAZNE
@@ -36,6 +39,18 @@ const mapStateToProps = state => { // Laczy z glownym statem
         task: state.tasks,
         status: state.status,
     };
+};
+
+Tasks.propTypes = {
+    fillTasks: PropTypes.func,
+    addTask: PropTypes.func,
+    removeTask: PropTypes.func,
+    task: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        priority: PropTypes.number,
+    }),
+    status: PropTypes.string,
 };
 
 

@@ -1,6 +1,8 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import './task.css';
+
+
 
 const Task = (props) => (
     <div className="Task" onClick={props.clicked}>
@@ -11,3 +13,8 @@ const Task = (props) => (
 
 export default Task;
 
+Task.propTypes = {
+    name: PropTypes.string,
+    priority: PropTypes.number,
+    clicked: PropTypes.func
+};

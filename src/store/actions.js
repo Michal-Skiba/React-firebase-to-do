@@ -7,7 +7,7 @@ export const REMOVE_TASK = 'REMOVE_TASK';
 
 // DODAWANIE TAKSÓW
 
-const writeTask =(id, name, priority) => {
+export const writeTask = (id, name, priority) => {
     return firebase.database().ref('Task/' + id).set({
         name,
         priority,
@@ -29,8 +29,8 @@ export const addTaskStatus = (status) =>{
     }
 };
 
-export const addTask = (name, priority) =>{
-    const newTask = {
+export let addTask = (name, priority) =>{
+    let newTask = {
         id: Math.round(Math.random()*1000000000),
         name: name,
         priority: priority

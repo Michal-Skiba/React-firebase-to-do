@@ -4,6 +4,7 @@ import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import AddTask from "./addTask"
 import { mount, shallow } from 'enzyme';
+
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Addtask component test',() =>{
@@ -25,8 +26,13 @@ describe('Addtask component test',() =>{
         expect(component.exists()).toBe(true);
     });
 
-    it('test nameChangeHandler', () =>{
+    it('input length should be 2', () => {
+        expect(component.find('input').length).toBe(2);
+    });
 
+    it('test nameChangeHandler', () =>{
+        console.log(component.find('#stodwa').find('#button'));
+        console.log(component.state());
         const name = "name";
         const priority = "priority";
         const inputName = component.find('#firstInput');
@@ -35,21 +41,14 @@ describe('Addtask component test',() =>{
             name: 'name',
             priority: 'priority'
         };
-        const button = component.find('#button');
         inputName.simulate('change', name);
         inputPriority.simulate('change', priority);
-        button.simulate('click');
+        console.log(button);
+        button.simulate('click'); //nie dizała, znajduje pięć przycisków
         expect(spy).toHaveBeenCalledTimes(1);
         expect(secondSpy).toHaveBeenCalledTimes(1);
-        expect(state()).toEqual(expectedState)
+        expect(component.state()).toEqual(expectedState)
 
-
-        //console.log(component.debug());
-        //const button = component.find('#button').get(0);
-        //button.simulate('click')
-        //expect(AddTask.this.nameChangedHandler).toHaveBeenCalled();
-        //expect(component.state()).toEqual(expectedState)
-        //component.find('#button').simulate('click')
     });
 
 });

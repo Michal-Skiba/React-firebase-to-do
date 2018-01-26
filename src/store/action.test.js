@@ -1,7 +1,20 @@
 import * as actions from './actions';
 
 
+
+
+
 describe('action change status, and add task', () =>{
+    let spy;
+    let secondSpy;
+    beforeEach(() => {
+        spy = jest.fn();
+        secondSpy = jest.fn();
+    });
+    actions.writeTask = () => spy();
+    actions.addTaskStatus = () => secondSpy();
+
+
    it('should create an action to add status:success', ()=>{
        const task = "test";
        const expectedAction = {
@@ -19,9 +32,11 @@ describe('action change status, and add task', () =>{
         };
         expect(actions.addTaskStatus(status)).toEqual(expectedAction)
    });
-    it('should add function addTask', () =>{
-
-    })
+   it('should add function addTask', () =>{
+        actions.addTask();
+        expect(spy).toHaveBeenCalled();
+        expect(secondSpy).toHaveBeenCalled();
+   })
 });
 
 
