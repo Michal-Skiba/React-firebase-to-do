@@ -8,9 +8,7 @@ import { addTask } from "../store/actions";
 import { removeTask } from "../store/actions";
 import { fillTasks } from "../store/actions";
 
-
 export class Tasks extends Component {
-
     componentWillMount(){
         this.props.fillTasks(); // fillTasks() -- to pójdzie bez conecta i dipatch nie będzie działał -- BARDZO WAZNE
     }
@@ -18,7 +16,6 @@ export class Tasks extends Component {
     render () {
         return (
             <div>
-
                 <AddTask taskAdded={this.props.addTask}/>
                 {this.props.task.map(tsk => (
                     <Task
@@ -34,7 +31,7 @@ export class Tasks extends Component {
     }
 }
 
-const mapStateToProps = state => { // Laczy z glownym statem
+const mapStateToProps = state => {
     return {
         task: state.tasks,
         status: state.status,
@@ -53,6 +50,7 @@ Tasks.propTypes = {
     status: PropTypes.string,
 };
 
+export default connect(mapStateToProps,  { addTask, removeTask, fillTasks} )(Tasks);
 
 /*
 const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state przez reducera
@@ -62,4 +60,3 @@ const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state prze
     }
 };
 */
-export default connect(mapStateToProps,  { addTask, removeTask, fillTasks} )(Tasks);

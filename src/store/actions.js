@@ -23,6 +23,7 @@ export const addTaskSuccess = (task) =>{
 };
 
 export const addTaskStatus = (status) =>{
+    console.log(status);
     return{
         type: ADD_TASK_STATUS,
         status: status
@@ -35,7 +36,6 @@ export let addTask = (name, priority) =>{
         name: name,
         priority: priority
     };
-
     return (dispatch) => {
         dispatch(addTaskStatus("start"));
         writeTask(newTask.id, newTask.name, newTask.priority)

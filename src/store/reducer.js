@@ -1,12 +1,9 @@
 import * as actionTypes from './actions';
 
-
-
-const initialState = {
+export const initialState = {
     tasks: [],
-    status: "success",
+    status: "start",
 };
-
 
 const reducer = ( state = initialState, action ) => {
     switch ( action.type ) {
@@ -30,7 +27,6 @@ const reducer = ( state = initialState, action ) => {
                 tasks: state.tasks.filter(task => task.id !== action.id)
             };
          }
-
         return state;
 };
 

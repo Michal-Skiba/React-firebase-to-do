@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './addTask.css';
-import Button from 'material-ui/Button';
 import PropTypes from "prop-types";
 
 export class AddTask extends Component {
@@ -22,19 +21,21 @@ export class AddTask extends Component {
     render () {
         return (
             <div className="AddTask">
-                <input
-                    id="firstInput"
-                    type="text" 
-                    placeholder="Name" 
-                    onChange={this.nameChangedHandler}
-                    value={this.state.name} />
-                <input
-                    id="secondInput"
-                    type="number" 
-                    placeholder="priority"
-                    onChange={this.priorityChangedHandler}
-                    value={this.state.priority} />
-                <Button id="button" raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</Button>
+                <form>
+                    <input
+                        id="firstInput"
+                        type="text"
+                        placeholder="Name"
+                        onChange={this.nameChangedHandler}
+                        value={this.state.name} />
+                    <input
+                        id="secondInput"
+                        type="number"
+                        placeholder="priority"
+                        onChange={this.priorityChangedHandler}
+                        value={this.state.priority} />
+                    <submit id="button" raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</submit>
+                </form>
             </div>
         );
     }

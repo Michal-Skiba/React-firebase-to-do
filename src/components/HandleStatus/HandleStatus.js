@@ -1,7 +1,7 @@
 import React from 'react';
 import "./HandleStatus.css"
 
-const HandleStatus = ({ status }) => { // można bezpośrednio przekazać || (dd) ? true :false; ZMIEN NAZWE
+const HandleStatus = ({ status }) => {
     let answer = "";
     if(status === "start") {
        return(answer = <div id='loading'> LOADING </div>)
@@ -17,4 +17,3 @@ const HandleStatus = ({ status }) => { // można bezpośrednio przekazać || (dd
 
 export default HandleStatus;
 
-//(status === true) ?   (loading) : (status === false) ? (error) : (empty)
