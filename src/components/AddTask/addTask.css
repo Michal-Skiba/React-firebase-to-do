@@ -1,4 +1,18 @@
+*{
+    box-sizing: border-box;
+}
 .AddTask {
     text-align: center;
     margin: 30px;
+}
+input {
+    width: 20%;
+    margin: 0 10px;
+}
+
+input[type=submit] {
+    border: solid 1px gray;
+    width: 150px;
+    height: 25px;
+    text-align: center;
 }

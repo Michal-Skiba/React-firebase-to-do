@@ -17,7 +17,7 @@ describe('Addtask component test',() =>{
     });
 
     it('input length should be 2', () => {
-        expect(component.find('input').length).toBe(2);
+        expect(component.find('input').length).toBe(3);
     });
 
     it('test nameChangeHandler', () =>{

@@ -34,7 +34,7 @@ export class AddTask extends Component {
                         placeholder="priority"
                         onChange={this.priorityChangedHandler}
                         value={this.state.priority} />
-                    <submit id="button" raised color="primary" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}>Add Task</submit>
+                    <input id="button" type="submit" value="Add Task" onClick={() => this.props.taskAdded(this.state.name, this.state.priority)}/>
                 </form>
             </div>
         );

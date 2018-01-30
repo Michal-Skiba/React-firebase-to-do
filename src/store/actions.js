@@ -17,13 +17,11 @@ export const writeTask = (id, name, priority) => {
 export const addTaskSuccess = (task) =>{
     return{
         type: ADD_TASK_SUCCESS,
-        status: "success",
         task,
     }
 };
 
 export const addTaskStatus = (status) =>{
-    console.log(status);
     return{
         type: ADD_TASK_STATUS,
         status: status

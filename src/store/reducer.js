@@ -14,7 +14,7 @@ const reducer = ( state = initialState, action ) => {
                     ...state.tasks,
                     action.task,
                 ],
-                status: action.status
+                status: "success"
             };
         case actionTypes.ADD_TASK_STATUS:
             return {

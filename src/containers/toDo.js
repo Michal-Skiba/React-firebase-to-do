@@ -38,6 +38,10 @@ const mapStateToProps = state => {
     };
 };
 
+Task.defaultProps = {
+    task: [],
+};
+
 Tasks.propTypes = {
     fillTasks: PropTypes.func,
     addTask: PropTypes.func,
@@ -53,6 +57,9 @@ Tasks.propTypes = {
 export default connect(mapStateToProps,  { addTask, removeTask, fillTasks} )(Tasks);
 
 /*
+jak map nie ma choćby pustej arrayki to się wywala,
+testy się wywywalały przez to, że funkcje wywołujące się nie były w propsach
+
 const mapDispatchToProps = dispatch => { // wywoluje zmiany w glownym state przez reducera
     return {
         onAddTask: (name, priority) => dispatch({type: actionTypes.ADD_TASK, taskData: {name: name, priority: priority}}),
