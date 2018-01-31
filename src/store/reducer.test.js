@@ -1,13 +1,9 @@
 import React from 'react';
-import { createMockStore } from '../../helpers/createMockStore'
+import {reducer} from './reducer'
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 Enzyme.configure({ adapter: new Adapter() });
-
-const initialState = {
-    tasks: [],
-    status: "start",
-};
+import initialState from './initialState';
 
 const state = {
     tasks: [
@@ -45,20 +41,21 @@ describe('component Tasks tests', () =>{
         };
         expect(reducer(initialState, action)).toEqual(expectedState);
     });
+
     it('test change status action', () => {
+        const expectedState = {
+            ...initialState,
+            status: "error",
+        };
         const action = {
             type: 'ADD_TASK_STATUS',
             status: "error"
         };
-        const expectedState = {
-            ...initialState,
-            tasks: [
-                ...initialState.tasks,
-            ],
-            status: "error",
-        };
-        expect(reducer(initialState, action)).toEqual(expectedState);
+
+        expect(reducer(initialState,action )).toEqual(expectedState);
+
     });
+
     it('test remove task action', () => {
         const action = {
             type: 'REMOVE_TASK',
@@ -75,4 +72,16 @@ describe('component Tasks tests', () =>{
         };
         expect(reducer(state, action)).toEqual(expectedState);
     });
+
+    it('test change progres action', () =>{
+        const action = {
+            type: 'CHANGE_PROGRESS',
+            progress: 4,
+        };
+        const expectedState = {
+            ...initialState,
+            progress: 4,
+        };
+        expect(reducer(initialState,action)).toEqual(expectedState);
+    })
 });
